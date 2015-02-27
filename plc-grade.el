@@ -59,9 +59,7 @@
 
 (defun plc-test-to-point-file (test-file)
   "Converts a file `X.agda' to `X.points'."
-  (if (s-chop-suffix ".agda" test-file)
-      (concat (substring test-file 0 -5) ".points")
-    nil)
+  (concat (s-chop-suffix ".agda" test-file) ".points")
   )
 
 (defun plc-extract-points (point-file)
