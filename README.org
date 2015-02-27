@@ -1,0 +1,44 @@
+* PLC Elisp Grader
+** What is this?
+This is code for grading agda homework from within Emacs.
+** How to get it
+Use either of these commands:
+#+BEGIN_SRC bash
+git checkout https://github.com/CarlOlson/plc-grade.git
+svn co https://github.com/CarlOlson/plc-grade
+#+END_SRC
+You can also get the source here.
+** How to install it
+You must add the following to your =.emacs= file:
+#+BEGIN_SRC emacs-lisp
+(eval-after-load "agda2-mode"
+  '(progn
+     (load "<path-to-file>/plc-grade.el")))
+#+END_SRC
+** How to use it
+Before grading, the =grading= directory must be copied to the homework
+folder. Example folder structure:
+#+BEGIN_SRC bash
+/plc-hw
+/plc-hw/hw2
+/plc-hw/hw2/grading
+#+END_SRC
+To grade, call the function =plc-grade= from the file buffer.
+#+BEGIN_SRC
+M+x plc-grade
+#+END_SRC
+=M= is the meta key, =ALT= for most people.
+
+This function can be bound to a key in Agda mode:
+#+BEGIN_SRC
+(eval-after-load "agda2-mode"
+  '(progn
+     (load "<path-to-file>/plc-grade.el")
+     (define-key agda2-mode-map (kbd "C-c g")
+       'plc-grade)))
+#+END_SRC
+** What's taking so long?
+The current code is not asynchronous and must call Agda once per test
+file. This means Emacs will freeze up until the tests complete. Agda
+can be slow, especially on laptops. This makes it a nuisance if you
+accidentally grade a file; consider not using a hotkey.
