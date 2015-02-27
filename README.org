@@ -30,7 +30,7 @@ M+x plc-grade
 =M= is the meta key, =ALT= for most people.
 
 This function can be bound to a key in Agda mode:
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
 (eval-after-load "agda2-mode"
   '(progn
      (load "<path-to-file>/plc-grade.el")
